@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Generator{% endblock %}
+
+{% block content %}
+	<div class="container mt-5">
+		<div class="content has-text-centered py-2">
+			<span class="title is-2">Questions & Answers Generator</span>
+		</div>
+		<div class="columns">
+			<div class="column">
+				<div class="box">
+					<div class="content has-text-centered">
+						<span class="subtitle is-3">Tools</span>
+					</div>
+					<form class="mx-3" method="POST">
+						{{form|crispy}}
+						<div class="control">
+							{% csrf_token %}
+							<input class="button is-primary" type="submit" value="Generate">
+						</div>
+					</form>
+				</div>
+			</div>
+			{% if records %}
+			<div class="column">
+				<div class="box">
+					<div class="content has-text-centered">
+						<span class="subtitle is-3">History</span>
+					</div>
+					{% for record in records %}
+					<article class="card mt-3">
+						<div class="card-header">
+							<p class="card-header-title">{{record.composer}}</p>
+						</div>
+						<div class="card-content">
+							<div class="content">
+								<span class="subtitle">{{record.generated_data|default:"empty"}}</span>
+							</div>
+						</div>
+						<div class="card-footer">
+							<p class="card-footer-item">
+								<span><b>Topic</b> &nbsp;</span>
+							</p>
+							<p class="card-footer-item">
+								<span>{{record.topic}}</span>
+							</p>
+						</div>
+						<div class="card-footer">
+							<p class="card-footer-item">
+								<span><b>Date</b> &nbsp;</span>
+							</p>
+							<p class="card-footer-item">
+								<span>{{record.created_date}}</span>
+							</p>
+						</div>
+					</article>
+					{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

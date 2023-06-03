@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock %}
+
+{% block content %}
+  <div class="has-text-centered mt-5 mb-5">
+    <figure class="image is-inline-block">
+      <img src="{% static 'images/logo.png' %}">
+    </figure>
+    <p class="subtitle is-3 mt-5">
+      Open Questions & Answers generator.
+    </p>
+    <a class="button is-info" href="{% url 'generator' %}">Let's Start</a>
+  </div>
+{% endblock %}
